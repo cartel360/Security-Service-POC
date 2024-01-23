@@ -1,29 +1,19 @@
-# django imports
 from django.contrib.auth import login
-
-# rest_framework imports
 from rest_framework import generics, authentication, permissions
 from rest_framework.settings import api_settings
 from rest_framework.authtoken.serializers import AuthTokenSerializer
-
-# knox imports
 from knox.views import LoginView as KnoxLoginView
 from knox.auth import TokenAuthentication
-
-# local apps import
 from core.serializers import UserSerializer, AuthSerializer
-
 from rest_framework.authentication import SessionAuthentication
 
 
 
 class CreateUserView(generics.CreateAPIView):
-    # Create user API view
     serializer_class = UserSerializer
 
 
 class LoginView(KnoxLoginView):
-    # login view extending KnoxLoginView
     serializer_class = AuthSerializer
     permission_classes = (permissions.AllowAny,)
 
